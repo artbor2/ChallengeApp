@@ -1,21 +1,16 @@
-﻿var name = "Ewa";
-bool female = true;
-var age = 33;
+﻿int number = 4566;
+string numberInString = number.ToString();
+char[] letters = numberInString.ToCharArray();
+int[] digits = new int[10]; 
 
+foreach (char c in letters)
+{
+    string digitString = c + "";
+    int index = int.Parse(digitString);
+    digits[index] = digits[index] + 1;
+}
 
-if (female && age < 30)
+for (int i = 0; i < digits.Length; i++)
 {
-    Console.WriteLine("Kobieta poniżej 30 lat");
-}
-else if (name == "Ewa" && age == 33)
-{
-    Console.WriteLine(name + ", lat " + age);
-}
-else if (!female && age < 18)
-{
-    Console.WriteLine("Niepełnoletni Mężczyzna");
-}
-else
-{
-    Console.WriteLine("To jest już koniec.");
+    Console.WriteLine(i + " => " + digits[i]);
 }
