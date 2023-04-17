@@ -1,16 +1,42 @@
-﻿int number = 4566;
-string numberInString = number.ToString();
-char[] letters = numberInString.ToCharArray();
-int[] digits = new int[10]; 
+﻿using ChallengeApp;
 
-foreach (char c in letters)
-{
-    string digitString = c + "";
-    int index = int.Parse(digitString);
-    digits[index] = digits[index] + 1;
-}
+List<Employee> employeesList = new List<Employee>();
 
-for (int i = 0; i < digits.Length; i++)
+Employee employee1 = new Employee("Jan", "Kowalski", 34);
+employee1.AddScore(2);
+employee1.AddScore(3);
+employee1.AddScore(3);
+employee1.AddScore(7);
+employee1.AddScore(5);
+
+Employee employee2 = new Employee("Adam", "Malinowski", 27);
+employee2.AddScore(3);
+employee2.AddScore(7);
+employee2.AddScore(3);
+employee2.AddScore(4);
+employee2.AddScore(6);
+
+Employee employee3 = new Employee("Tomasz", "Iksiński", 11);
+employee3.AddScore(6);
+employee3.AddScore(4);
+employee3.AddScore(5);
+employee3.AddScore(7);
+employee3.AddScore(5);
+
+employeesList.Add(employee1);
+employeesList.Add(employee2);
+employeesList.Add(employee3);
+
+int maxScore = -1;
+Employee best = null;
+foreach (Employee employee in employeesList)
 {
-    Console.WriteLine(i + " => " + digits[i]);
+    if (employee.Result > maxScore)
+    {   maxScore = employee.Result;
+        best = employee;
+    }
 }
+        
+var answer = best.FirstName + " " + best.LastName + ", lat " + best.Age + ", " + best.Result;
+
+Console.WriteLine(answer);
