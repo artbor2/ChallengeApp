@@ -27,5 +27,17 @@
             this.employeePoints.Add(score);
 
         }
+
+        public void subtractScore(int score)
+        {
+            if (score >= 0)
+            {
+                score *= -1;
+                this.employeePoints.Add(score);
+            } else if (score < 0)
+            {
+                this.employeePoints.Add(score);
+           }
+        }
     }
 }

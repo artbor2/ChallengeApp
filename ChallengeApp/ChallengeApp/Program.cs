@@ -37,6 +37,7 @@ foreach (Employee employee in employeesList)
     }
 }
         
-var answer = best.FirstName + " " + best.LastName + ", lat " + best.Age + ", " + best.Result;
+var answer = best.FirstName + " " + best.LastName 
+    + ", lat " + best.Age + ", " + best.Result;
 
 Console.WriteLine(answer);
