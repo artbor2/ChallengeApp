@@ -6,68 +6,49 @@ namespace ChallengeApp.Tests
     {
 
         [Test]
-        public void WhenEmployeyCollectScores_ShouldGetScoresSum()
+        public void WhenEmployeeCollectGrades__ShouldGetCorrectLowestGrade()
         {
             // arrange
-
-            var user = new Employee("Ewa", "UdaBuda#124jestemChuda", 23);
-            user.AddScore(5);
-            user.AddScore(5);
-            user.AddScore(-5);
-            user.AddScore(8);
-            user.AddScore(7);
+            var emp1 = new Employee("Jan Kowalski", "asdf1234");
 
             // act
-            var result = user.Result;
+            emp1.addGrade(1);
+            emp1.addGrade(3);
+            emp1.addGrade(5);
+
 
             // assert
-            Assert.That(result, Is.EqualTo(20));
+            var stat = emp1.GetStatistics();
+            Assert.AreEqual(1, stat.Min);
         }
         [Test]
-        public void WhenEmployeeGetNegativeScoreEnteredAsPositiveNumber()
+        public void WhenEmployeeCollectGrades__ShouldGetCorrectTheHighestGrade()
         {
-            // Arrannage
-            var emp1 = new Employee("Jan", "Kowalski", 21);
-            emp1.AddScore(2);
-            emp1.AddScore(3);
-            emp1.AddScore(5);
+            // arrange
+            var emp1 = new Employee("Jan Kowalski", "asdf1234");
 
-            // Act
-            emp1.subtractScore(5);
+            // act
+            emp1.addGrade(6);
+            emp1.addGrade(2);
+            emp1.addGrade(4);
 
-            // Asert
-            Assert.AreEqual(emp1.Result, 5); 
-
+            var stat = emp1.GetStatistics();
+            Assert.AreEqual(6, stat.Max);
         }
+
         [Test]
-        public void WhenEmployeeGetNegativeScoreEnteredAsNegativeNumber()
+        public void WhenEmployeeCollectGrades__ShouldGetCorrectAverageGrade()
         {
-            var emp = new Employee("Adam", "Malinowski", 23);
-            emp.AddScore(2);
-            emp.AddScore(5);
-            emp.subtractScore(-5);
+            // arrange
+            var emp1 = new Employee("Jan Kowalski", "asdf1234");
 
-            Assert.AreEqual(emp.Result, 2);
-        }
-        [Test]
-        public void WhenEmployeeGetZeroPoints_AddScore_method()
-        {
-            var emp = new Employee("Jan", "Kowalski", 33);
-            emp.AddScore(5);
+            // act
+            emp1.addGrade(3);
+            emp1.addGrade(5);
+            emp1.addGrade(7);
 
-            emp.AddScore(0);
-
-            Assert.AreEqual(emp.Result, 5);
-        }
-        [Test]
-        public void WhenEmployeeGetZeroPoints_Substract_method()
-        {
-            var emp = new Employee("Jan", "Abacki", 33);
-            emp.AddScore(5);
-
-            emp.subtractScore(0);
-
-            AssetTargetFallbackFramework.Equals(emp.Result, 5); 
+            var stat = emp1.GetStatistics();
+            Assert.AreEqual(5, stat.Average);
         }
 
     }
