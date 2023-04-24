@@ -1,10 +1,10 @@
 ﻿using ChallengeApp;
 
 Employee employee = new Employee("Jan", "Kowalski");
+employee.addGrade("Adam");
+employee.addGrade("4000  ,11");
+employee.addGrade(2);
 employee.addGrade(3);
-employee.addGrade(6);
-employee.addGrade(4);
-employee.addGrade(5);
 var statistics = employee.GetStatistics();
 Console.WriteLine($"Average: {statistics.Average:N2} ");
 Console.WriteLine($"Max: {statistics.Max}");
