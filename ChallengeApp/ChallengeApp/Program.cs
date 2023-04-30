@@ -1,10 +1,12 @@
 ﻿using ChallengeApp;
+using System.Runtime.InteropServices;
 
 Console.WriteLine("Witamy w programie XYZ do oceny pracowników");
 Console.WriteLine("===========================================");
 Console.WriteLine();
 Console.Write("Podaj imię pracownika: ");
 var name = Console.ReadLine();
+
 Console.Write("Podaj nazwisko pracownika: ");
 var surname = Console.ReadLine();
 var employee = new Employee(name, surname);
@@ -21,7 +23,15 @@ while (runApp)
 
     } else
     {
-        employee.AddGrade(input);
+        try
+        {
+            employee.AddGrade(input);
+
+        } catch (Exception e)
+        {
+            Console.WriteLine($"Exception catched: {e.Message}");
+        }
+        
     }
     
 }

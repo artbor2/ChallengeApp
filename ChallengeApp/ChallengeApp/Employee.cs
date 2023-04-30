@@ -1,9 +1,10 @@
-﻿using System.Diagnostics;
-
-namespace ChallengeApp
+﻿namespace ChallengeApp
 {
     public class Employee
     {
+        
+        private const float GradeMin = 0;
+        private const float GradeMax = 100;
         public string Name { get; private set; }
         public string SurName { get; private set; }
 
@@ -17,14 +18,39 @@ namespace ChallengeApp
 
         public void AddGrade(float grade)
         {
-            if (grade >= 0 && grade <= 100)
+            if (grade >= GradeMin && grade <= GradeMax)
             {
                 this.grades.Add(grade);
             }
             else
             {
 
-                Console.WriteLine("Invalid grade value.");
+                throw new Exception("Invalid grade value");
+            }
+        }
+
+        public void AddGrade(char grade)
+        {
+            switch(grade)
+            {
+                case 'A':
+                case 'a':
+                    this.grades.Add(100);
+                    break;
+                case 'B':
+                    this.grades.Add(80);
+                    break;
+                case 'C':
+                    this.grades.Add(60);
+                    break;
+                case 'D':
+                    this.grades.Add(40);
+                    break;
+                case 'E':
+                    this.grades.Add(20);
+                    break;
+                    default:
+                    throw new Exception("Wrong letter");
             }
         }
 
@@ -55,7 +81,7 @@ namespace ChallengeApp
             }
             else
             {
-                Console.WriteLine("String is not float");
+                throw new Exception("String is not float");
             }
 
         }

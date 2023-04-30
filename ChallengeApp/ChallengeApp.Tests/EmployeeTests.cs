@@ -121,8 +121,6 @@ namespace ChallengeApp.Tests
 
         }
 
-
-
         [Test]
         public void WhenEmployeeCollectGrades_ShouldGetCorrectLowestGrade()
         {
