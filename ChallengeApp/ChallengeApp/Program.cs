@@ -23,9 +23,10 @@ while (runApp)
 
     } else
     {
+        employee.AddGrade(input);
         try
         {
-            employee.AddGrade(input);
+            
 
         } catch (Exception e)
         {

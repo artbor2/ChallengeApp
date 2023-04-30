@@ -1,4 +1,6 @@
+using Newtonsoft.Json.Linq;
 using NuGet.Frameworks;
+using System.Diagnostics;
 
 namespace ChallengeApp.Tests
 {
@@ -86,39 +88,29 @@ namespace ChallengeApp.Tests
         }
 
         [Test]
-        public void WhenEmployeeCollectGradelessThan0_SzouldbeIgnored()
-        {
+        public void WhenEmployeeCollectGradelessThan0_ExceptionShouldBeThrow()
+        {   
             // arrange
             var emp1 = new Employee("Jan Kowalski", "asdf1234");
 
             // act
-            emp1.AddGrade(10);
-            emp1.AddGrade(-50);
-            emp1.AddGrade(20);
-            emp1.AddGrade(30);
+            var exc = Assert.Throws<Exception>(() => emp1.AddGrade(-50));
 
             // assert
-            var stat = emp1.GetStatistics();
-            Assert.That(stat.Average, Is.EqualTo(20));
-
+            Assert.That(exc.Message, Is.EqualTo("Invalid grade value"));
         }
 
         [Test]
-        public void WhenEmployeeCollectGradeBiggerThan100_SzouldbeIgnored()
+        public void WhenEmployeeCollectGradeBiggerThan100_ExceptionShouldBeThrow()
         {
             // arrange
             var emp1 = new Employee("Jan Kowalski", "asdf1234");
 
             // act
-            emp1.AddGrade(10);
-            emp1.AddGrade(120);
-            emp1.AddGrade(20);
-            emp1.AddGrade(30);
+            var exc = Assert.Throws<Exception>(() => emp1.AddGrade(150));
 
             // assert
-            var stat = emp1.GetStatistics();
-            Assert.That(stat.Average, Is.EqualTo(20));
-
+            Assert.That(exc.Message, Is.EqualTo("Invalid grade value"));
         }
 
         [Test]
