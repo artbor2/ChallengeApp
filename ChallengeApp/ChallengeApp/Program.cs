@@ -1,4 +1,5 @@
 ﻿using ChallengeApp;
+using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
 
 Console.WriteLine("Witamy w programie XYZ do oceny pracowników");
@@ -9,7 +10,12 @@ var name = Console.ReadLine();
 
 Console.Write("Podaj nazwisko pracownika: ");
 var surname = Console.ReadLine();
-var employee = new Employee(name, surname);
+
+Employee employee;
+Console.Write("Podaj płeć pracownika[M/F]: ");
+char sex = Console.ReadLine()[0];
+
+employee = new Employee(name, surname, sex);
 Console.WriteLine();
 
 Boolean runApp = true;

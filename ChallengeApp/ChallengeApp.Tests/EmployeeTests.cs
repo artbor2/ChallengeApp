@@ -6,12 +6,22 @@ namespace ChallengeApp.Tests
 {
     public class EmployeeTests
     {
+        [Test]
+        public void WhenUserPressEnterAndNotEnterAnyValue()
+        {
+            var emp1 = new Employee("Jan Kowalski", "asdf1234", 'M');
+            string input = "\n";
+            
+            var exc = Assert.Throws<Exception>(() => emp1.AddGrade(input));
+            Assert.That(exc.Message, Is.EqualTo("String is not float"));
+
+        }
 
         [Test]
         public void WhenEmployeeCollectOneGradeAsIntege_ShouldGetCorrectEqualMinMaxAverageScore()
         {
             // arrange
-            var emp1 = new Employee("Jan Kowalski", "asdf1234");
+            var emp1 = new Employee("Jan Kowalski", "asdf1234", 'M');
 
             // act
             emp1.AddGrade(10);
@@ -27,7 +37,7 @@ namespace ChallengeApp.Tests
         public void WhenEmployeeCollectOneGradeAsLong_ShouldGetCorrectEqualMinMaxAverageScore()
         {
             // arrange
-            var emp1 = new Employee("Jan Kowalski", "asdf1234");
+            var emp1 = new Employee("Jan Kowalski", "asdf1234", 'M');
 
             // act
             emp1.AddGrade(10L);
@@ -43,7 +53,7 @@ namespace ChallengeApp.Tests
         public void WhenEmployeeCollectOneGradeAsFloat_ShouldGetCorrectEqualMinMaxAverageScore()
         {
             // arrange
-            var emp1 = new Employee("Jan Kowalski", "asdf1234");
+            var emp1 = new Employee("Jan Kowalski", "asdf1234", 'M');
 
             // act
             emp1.AddGrade(20.0f);
@@ -59,7 +69,7 @@ namespace ChallengeApp.Tests
         public void WhenEmployeeCollectOneGradeAsDouble_ShouldGetCorrectEqualMinMaxAverageScore()
         {
             // arrange
-            var emp1 = new Employee("Jan Kowalski", "asdf1234");
+            var emp1 = new Employee("Jan Kowalski", "asdf1234", 'M');
 
             // act
             emp1.AddGrade(20.0D);
@@ -75,7 +85,7 @@ namespace ChallengeApp.Tests
         public void WhenEmployeeCollectOneGradeAsString_ShouldGetCorrectEqualMinMaxAverageScore()
         {
             // arrange
-            var emp1 = new Employee("Jan Kowalski", "asdf1234");
+            var emp1 = new Employee("Jan Kowalski", "asdf1234", 'M');
 
             // act
             emp1.AddGrade("40");
@@ -91,7 +101,7 @@ namespace ChallengeApp.Tests
         public void WhenEmployeeCollectGradelessThan0_ExceptionShouldBeThrow()
         {   
             // arrange
-            var emp1 = new Employee("Jan Kowalski", "asdf1234");
+            var emp1 = new Employee("Jan Kowalski", "asdf1234", 'M');
 
             // act
             var exc = Assert.Throws<Exception>(() => emp1.AddGrade(-50));
@@ -104,7 +114,7 @@ namespace ChallengeApp.Tests
         public void WhenEmployeeCollectGradeBiggerThan100_ExceptionShouldBeThrow()
         {
             // arrange
-            var emp1 = new Employee("Jan Kowalski", "asdf1234");
+            var emp1 = new Employee("Jan Kowalski", "asdf1234", 'M');
 
             // act
             var exc = Assert.Throws<Exception>(() => emp1.AddGrade(150));
@@ -117,7 +127,7 @@ namespace ChallengeApp.Tests
         public void WhenEmployeeCollectGrades_ShouldGetCorrectLowestGrade()
         {
             // arrange
-            var emp1 = new Employee("Jan Kowalski", "asdf1234");
+            var emp1 = new Employee("Jan Kowalski", "asdf1234", 'M');
 
             // act
             emp1.AddGrade(10);
@@ -134,7 +144,7 @@ namespace ChallengeApp.Tests
         public void WhenEmployeeCollectGrades_ShouldGetCorrectTheHighestGrade()
         {
             // arrange
-            var emp1 = new Employee("Jan Kowalski", "asdf1234");
+            var emp1 = new Employee("Jan Kowalski", "asdf1234", 'M');
 
             // act
             emp1.AddGrade(60);
@@ -150,7 +160,7 @@ namespace ChallengeApp.Tests
         public void WhenEmployeeCollectGrades_ShouldGetCorrectAverageGrade()
         {
             // arrange
-            var emp1 = new Employee("Jan Kowalski", "asdf1234");
+            var emp1 = new Employee("Jan Kowalski", "asdf1234", 'M');
 
             // act
             emp1.AddGrade(30);
@@ -166,7 +176,7 @@ namespace ChallengeApp.Tests
         public void WhenEmployeeCollectAverageGradesEqualOrMoreThan80Points_ShouldGetCorrectAverageLetterGrade_A()
         {
             // arrange
-            var emp1 = new Employee("Jan Kowalski", "asdf1234");
+            var emp1 = new Employee("Jan Kowalski", "asdf1234", 'M');
 
             // act
             emp1.AddGrade(90);
@@ -182,7 +192,7 @@ namespace ChallengeApp.Tests
         public void WhenEmployeeCollectAverageGradesEqualOrMoreThan60Points_ShouldGetCorrectAverageLetterGrade_B()
         {
             // arrange
-            var emp1 = new Employee("Jan Kowalski", "asdf1234");
+            var emp1 = new Employee("Jan Kowalski", "asdf1234", 'M');
 
             // act
             emp1.AddGrade(70);
@@ -198,7 +208,7 @@ namespace ChallengeApp.Tests
         public void WhenEmployeeCollectAverageGradesEqualOrMoreThan40Points_ShouldGetCorrectAverageLetterGrade_C()
         {
             // arrange
-            var emp1 = new Employee("Jan Kowalski", "asdf1234");
+            var emp1 = new Employee("Jan Kowalski", "asdf1234", 'M');
 
             // act
             emp1.AddGrade(50);
@@ -214,7 +224,7 @@ namespace ChallengeApp.Tests
         public void WhenEmployeeCollectAverageGradesEqualOrMoreThan20Points_ShouldGetCorrectAverageLetterGrade_D()
         {
             // arrange
-            var emp1 = new Employee("Jan Kowalski", "asdf1234");
+            var emp1 = new Employee("Jan Kowalski", "asdf1234", 'M');
 
             // act
             emp1.AddGrade(30);
@@ -230,7 +240,7 @@ namespace ChallengeApp.Tests
         public void WhenEmployeeCollectAverageGradesLessThan20Points_ShouldGetCorrectAverageLetterGrade_E()
         {
             // arrange
-            var emp1 = new Employee("Jan Kowalski", "asdf1234");
+            var emp1 = new Employee("Jan Kowalski", "asdf1234", 'M');
 
             // act
             emp1.AddGrade(10);
