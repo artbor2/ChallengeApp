@@ -5,47 +5,91 @@ using System.Runtime.InteropServices;
 Console.WriteLine("Witamy w programie XYZ do oceny pracowników");
 Console.WriteLine("===========================================");
 Console.WriteLine();
-Console.Write("Podaj imię pracownika: ");
-var name = Console.ReadLine();
 
-Console.Write("Podaj nazwisko pracownika: ");
-var surname = Console.ReadLine();
+Console.Write("Oceniamy pracownika (1) lub kierownika (2): ");
+var choosen = Console.ReadLine();
 
-Employee employee;
-Console.Write("Podaj płeć pracownika[M/F]: ");
-char sex = Console.ReadLine()[0];
-
-employee = new Employee(name, surname, sex);
-Console.WriteLine();
-
-Boolean runApp = true;
-while (runApp)
+if (choosen == "1")
 {
-    Console.Write("Podaj kolejną ocenę pracownika lub 'end' aby zakończyć dodawanie ocen: ");
-    var input = Console.ReadLine();
-    if (input == "end")
-    {
-        runApp = false;
+    Console.Write("Podaj imię pracownika: ");
+    var name = Console.ReadLine();
 
-    } else
-    {
-        employee.AddGrade(input);
-        try
-        {
-            
+    Console.Write("Podaj nazwisko pracownika: ");
+    var surname = Console.ReadLine();
 
-        } catch (Exception e)
+    Employee employee = new Employee(name, surname);
+    Boolean runApp = true;
+    while (runApp)
+    {
+        Console.Write("Podaj kolejną ocenę lub 'end' aby zakończyć dodawanie ocen: ");
+        var input = Console.ReadLine();
+        if (input == "end")
         {
-            Console.WriteLine($"Exception catched: {e.Message}");
+            runApp = false;
+
         }
-        
-    }
-    
-}
-var statistics = employee.GetStatistics();
-Console.WriteLine();
+        else
+        {
+            try
+            {
+                employee.AddGrade(input);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Exception catched: {e.Message}");
+            }
+        }
 
-Console.WriteLine($"Min:{statistics.Min}");  
-Console.WriteLine($"Max:{statistics.Max}");
-Console.WriteLine($"Avg: { statistics.Average}");
-Console.WriteLine($"AvgLetter: {statistics.AverageLetter}");
+    }
+    var statistics = employee.GetStatistics();
+    Console.WriteLine();
+    Console.WriteLine($"Min:{statistics.Min}");
+    Console.WriteLine($"Max:{statistics.Max}");
+    Console.WriteLine($"Avg: {statistics.Average}");
+    Console.WriteLine($"AvgLetter: {statistics.AverageLetter}");
+
+
+}
+
+else if (choosen == "2")
+{
+    Console.Write("Podaj imię kierownika: ");
+    var name = Console.ReadLine();
+
+    Console.Write("Podaj nazwisko kierownika: ");
+    var surname = Console.ReadLine();
+
+    Employee employee = new Employee(name, surname);
+
+    Boolean runApp = true;
+    Supervisor supervisor = new Supervisor(name, surname);
+
+    while (runApp)
+    {
+        Console.Write("Podaj kolejną ocenę lub 'end' aby zakończyć dodawanie ocen: ");
+        var input = Console.ReadLine();
+        if (input == "end")
+        {
+            runApp = false;
+
+        }
+        else
+        {
+            try
+            {
+                supervisor.AddGrade(input);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Exception catched: {e.Message}");
+            }
+        }
+
+    }
+    var statistics = supervisor.GetStatistics();
+    Console.WriteLine();
+    Console.WriteLine($"Min:{statistics.Min}");
+    Console.WriteLine($"Max:{statistics.Max}");
+    Console.WriteLine($"Avg: {statistics.Average}");
+    Console.WriteLine($"AvgLetter: {statistics.AverageLetter}");
+}

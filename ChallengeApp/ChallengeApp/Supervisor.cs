@@ -1,18 +1,22 @@
-﻿namespace ChallengeApp
+﻿
+using System.Diagnostics;
+using System.Net.WebSockets;
+
+namespace ChallengeApp
 {
-    public class Employee : IEmployee
+    public class Supervisor : IEmployee
     {
         public string Name { get; private set; }
+
         public string SurName { get; private set; }
 
         private List<float> grades = new List<float>();
 
-        public Employee(string name, string surname)
+        public Supervisor(string name, string surname)
         {
             this.Name = name;
             this.SurName = surname;
         }
-
         public void AddGrade(float grade)
         {
             if (grade >= 0 && grade <= 100)
@@ -25,13 +29,11 @@
                 throw new Exception("Invalid grade value");
             }
         }
-
         public void AddGrade(double grade)
         {
             float floatGrade = (float)grade;
             this.AddGrade(floatGrade);
         }
-
 
         public void AddGrade(int grade)
         {
@@ -44,7 +46,6 @@
             switch (grade)
             {
                 case 'A':
-                case 'a':
                     this.grades.Add(100);
                     break;
                 case 'B':
@@ -64,17 +65,59 @@
             }
         }
 
-        public void AddGrade(String grade)
+        public void AddGrade(string grade)
         {
-            if (float.TryParse(grade, out float result))
+            float sign = 0; // '-' -> -5, '+' -> + 5
+
+            if (grade[0] == '-')
             {
-                this.AddGrade(result);
+                grade = grade.Substring(1);
+                sign = -5;
+
             }
-            else
+            else if (grade[grade.Length - 1] == '-')
             {
-                throw new Exception("String is not float");
+                grade = (grade.Substring(0, grade.Length - 1));
+                sign = -5;
+            }
+            else if (grade[0] == '+')
+            {
+                grade = grade.Substring(1);
+                sign = +5;
+            }
+            else if (grade[grade.Length - 1] == '+')
+            {
+                grade = (grade.Substring(0, grade.Length - 1));
+                sign = +5;
+            }
+
+            switch (grade)
+            {
+                case "6":
+                    this.grades.Add(100 + sign);
+                    break;
+                case "5":
+                    this.grades.Add(80 + sign);
+                    break;
+                case "4":
+                    this.grades.Add(60 + sign);
+                    break;
+                case "3":
+                    this.grades.Add(40 + sign);
+                    break;
+                case "2":
+                    this.grades.Add(20 + sign);
+                    break;
+                case "1":
+                    this.grades.Add(0 + sign);
+                    break;
+                default:
+                    throw new Exception("Wrong letter");
+
+
             }
         }
+
 
         public Statistics GetStatistics()
         {
