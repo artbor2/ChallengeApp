@@ -1,10 +1,11 @@
-﻿using System.Diagnostics;
-
-namespace ChallengeApp
+﻿namespace ChallengeApp
 {
     public class EmployeeInFile : EmployeeBase
     {
         private const string fileName = "grades.txt";
+
+        public override event GradeAddedDelegate GradeAdded;
+
         public EmployeeInFile(string name, string surname) : base(name, surname)
         {
         }
@@ -18,6 +19,11 @@ namespace ChallengeApp
                     using (var writer = File.AppendText(fileName))
                     {
                         writer.WriteLine(grade);
+
+                        if (GradeAdded != null)
+                        {
+                            GradeAdded(this, new EventArgs());
+                        }
                     }
                 }
                 catch (Exception e)
@@ -28,7 +34,7 @@ namespace ChallengeApp
             }
             else
             {
-                throw new Exception($"Invalid grade value ({grade}) [to low value or to big]");
+                throw new Exception($"Invalid grade value ({grade}) [less than 0 or more than 100]");
             }
         }
         public override void AddGrade(char grade)
@@ -65,7 +71,14 @@ namespace ChallengeApp
             }
             else
             {
-                throw new Exception("String is not float");
+                if (grade.Length > 1)
+                {
+                    throw new Exception("String is not float");
+                }
+                else
+                {
+                    this.AddGrade(grade[0]);
+                }
             }
         }
 
@@ -83,7 +96,7 @@ namespace ChallengeApp
             this.AddGrade(floatGrade);
         }
 
- 
+
 
         private List<float> ReadNumbers(string fileName)
         {
@@ -107,7 +120,8 @@ namespace ChallengeApp
                                 }
                                 else
                                 {
-                                    throw new Exception($"Invalid grade value ({number}) - from file");                                }     
+                                    throw new Exception($"Invalid grade value ({number}) - from file");
+                                }
                             }
                             catch (Exception ex)
                             {

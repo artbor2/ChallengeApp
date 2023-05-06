@@ -3,17 +3,6 @@ namespace ChallengeApp.Tests
     public class EmployeeInMemoryTests
     {
         [Test]
-        public void WhenUserPressEnterAndNotEnterAnyValue()
-        {
-            var emp1 = new EmployeeInMemory("Jan Kowalski", "asdf1234");
-            string input = "\n";
-            
-            var exc = Assert.Throws<Exception>(() => emp1.AddGrade(input));
-            Assert.That(exc.Message, Is.EqualTo("String is not float"));
-
-        }
-
-        [Test]
         public void WhenEmployeeCollectOneGradeAsIntege_ShouldGetCorrectEqualMinMaxAverageScore()
         {
             // arrange
@@ -95,7 +84,7 @@ namespace ChallengeApp.Tests
 
         [Test]
         public void WhenEmployeeCollectGradelessThan0_ExceptionShouldBeThrow()
-        {   
+        {
             // arrange
             var emp1 = new EmployeeInMemory("Jan Kowalski", "asdf1234");
 
@@ -103,7 +92,7 @@ namespace ChallengeApp.Tests
             var exc = Assert.Throws<Exception>(() => emp1.AddGrade(-50));
 
             // assert
-            Assert.That(exc.Message, Is.EqualTo("Invalid grade value"));
+            Assert.That(exc.Message, Is.EqualTo("Invalid grade value (-50) [less than 0 or more than 100]"));
         }
 
         [Test]
@@ -116,7 +105,7 @@ namespace ChallengeApp.Tests
             var exc = Assert.Throws<Exception>(() => emp1.AddGrade(150));
 
             // assert
-            Assert.That(exc.Message, Is.EqualTo("Invalid grade value"));
+            Assert.That(exc.Message, Is.EqualTo("Invalid grade value (150) [less than 0 or more than 100]"));
         }
 
         [Test]
@@ -236,7 +225,7 @@ namespace ChallengeApp.Tests
         public void WhenEmployeeCollectAverageGradesLessThan20Points_ShouldGetCorrectAverageLetterGrade_E()
         {
             // arrange
-            var emp1 = new EmployeeInMemory("Jan Kowalski", "asdf1234"  );
+            var emp1 = new EmployeeInMemory("Jan Kowalski", "asdf1234");
 
             // act
             emp1.AddGrade(10);
